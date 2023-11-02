@@ -1,0 +1,18 @@
+{%extends 'layout.html' %}
+{%block content%}
+
+<h1 style="color: blue; font-weight: bolder; font-style: italic;">Withdrawal</h1>
+<br>
+<hr>
+<div class="container">
+    <form action="{{ url_for('withdrawal') }}" method="post" autocomplete="off">
+      <div class="mb-3">
+        <label for="Deposite Amount" class="form-label">Withdrawal Amount</label>
+        <input type="text" class="form-control" id="exampleInputUsername" name="withdrawal aria-describedby="username">
+      </div>
+   
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+{% endblock %}
