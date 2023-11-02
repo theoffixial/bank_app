@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+   <h1>Deposit Page</h1>
+
+
+   <form action="/" method="post">
+        <input autocomplete="off" autofocus name="acc_no" placeholder="Enter Account Number" required type="text"> <br><br>
+        <input autocomplete="off" autofocus name="acc_name" placeholder="Enter Account Name" required type="text"> <br><br>
+        <input autocomplete="off" autofocus name="amount" placeholder="Enter Amount" required type="number"> <br><br>
+        <h1>{{balance}}</h1>
+        <p>Your Account Balance</p>
+
+        <button type="submit">Deposite</button>
+   </form>
+{% endblock %}
+
+
