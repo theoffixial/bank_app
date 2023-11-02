@@ -32,10 +32,3 @@ class Bank(User):
     def view_balance(self):
         return self.show_details()
     
-mark = Bank('mark')
-print(mark.show_details())
-print(mark.deposite(1000))
-print(mark.show_details())
-print(mark.withdrawal(100))
-print(mark.show_details())
-            

@@ -41,16 +41,22 @@ def deposite():
         return render_template ('deposite.html')
 
 
-@app.route('/withdrawal')
+
+
+
+
+@app.route('/withdrawal', methods=['GET', 'POST'])
 def withdrawal():
     if request.method == 'POST':
-        amount = request.form['withdrawal']
-        user.withdrawal(amount)
-        print(user.show_details())  # Call the show_details() method
+        amount = request.form.get('withdrawal')
+        if amount is not None:
+            user.withdrawal(amount)
+            print(user.show_details())  # Call the show_details() method
         return render_template('withdrawal.html')
     else:
-        return render_template ('withdrawal.html')
- 
+        return render_template('withdrawal.html')
+
+
 @app.route('/login',methods = ['GET','POST'])
 def login():
     global user
