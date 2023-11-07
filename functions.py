@@ -1,35 +1,31 @@
-#perent class
-class User():
-    def __init__(self, name):
+class AccHolder():
+    def __init__(self, account_number, name, bank_name):
+        self.account_number = account_number
         self.name = name
+        self.bank_name = bank_name
+        self.current_balance = 0
 
-    def show_details(self):
-        x = 'Personal details'
-        y = 'name:' + self.name
-        z = 'account balance is $' +str(self.balance)
-        result = [x,y,z]
-        return result     
+    def deposit(self, amount):
+        self.current_balance += amount
+        return self.current_balance
 
-# child class
-
-class Bank(User):
-    def __init__(self, name):
-        super().__init__(name)
-        self.balance = 0
-
-    def deposite(self,amount):
-        self.amount = int(amount)
-        self.balance = self.balance +self.amount
-        return 'account balance is now $' +str(self.balance)
-    
     def withdrawal(self, amount):
-        self.amount = int(amount)
-        if self.amount > self.balance:
-            return "Insufficient funds $" +str(self.balance)
-        else:
-            self.balance = self.balance-self.amount
-            return 'account balanceis now $' +str(self.amount)
-    def view_balance(self):
-        return self.show_details()
+        if self.current_balance - amount < 0:
+            return f"You can't withdraw more than your current balance ({self.current_balance})"
+        self.current_balance -= amount
+        return self.current_balance
 
-            
+
+
+# I Created a dictionary to store account owners, this will be our database in real time
+account_owners = {}
+ 
+
+# This is a function to display account informations
+def display_account_info(account_number):
+    owner_info = account_owners.get(account_number)
+    if owner_info:
+        account_holder = AccHolder(account_number, owner_info["name"], owner_info["bank_name"])
+        return account_holder
+    else:
+        return None

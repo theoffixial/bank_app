@@ -1,6 +1,7 @@
  # step one banking app
 from flask import Flask, render_template, request, session, url_for, redirect
 from function import Bank
+from functions import AccHolder, display_account_info
 
 app = Flask(__name__)
 users = {}
@@ -32,18 +33,21 @@ def register():
         return render_template('register.html')
 @app.route('/deposite', methods=['GET', 'POST'])
 def deposite():
-    if request.method == 'POST':
-        amount = request.form['deposite']
-        user.deposite(amount)
-        print(user.show_details())  # Call the show_details() method
+    if request.method == "GET":
+        return render_template("deposite.html")
+    elif request.method == "POST":
+        acc_number = request.form.get("acc_no")
+        acc_name = request.form.get("acc_name")
+
+        acc_holder = display_account_info(acc_number)
+
+        if acc_holder:
+            amount = float(request.form.get("amount"))
+            balance = acc_holder.deposit(amount)
+            return render_template("deposite.html", balance=balance)
         return render_template('deposite.html')
     else:
         return render_template ('deposite.html')
-
-
-
-
-
 
 @app.route('/withdrawal', methods=['GET', 'POST'])
 def withdrawal():
@@ -78,5 +82,5 @@ def login():
     return render_template('login.html')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port= '8000',
+    app.run(host='0.0.0.0', port= '5000',
     debug=True)
